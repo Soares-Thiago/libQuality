@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  api_lib_quality:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
+    container_name: api_lib_quality
+    environment:
+      STRING_CONNECTION: ${STRING_CONNECTION}
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - database_lib_quality
+    links:
+      - database_lib_quality
+    command: npm run dev
+
+  database_lib_quality:
+    image: mongo
+    container_name: database_lib_quality
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
