@@ -47,9 +47,9 @@ class RepositoryController {
 
           const data = await RepositoryService.searchRepo(searchRepo, token, userGithub)  
 
-          return res.json(data)
+          return res.status(200).json(data)
         }
-        throw new Error("Name of repository is empty");
+        throw new Error("Name of repository is empty")
         
     }catch(e){
       return res.status(500).json({"error": e.message})

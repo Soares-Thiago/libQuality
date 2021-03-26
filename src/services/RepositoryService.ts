@@ -24,12 +24,9 @@ class RepositoryServer {
     
         const getResourceAsync = promisify(hateoas.getResource.bind(hateoas))
     
-        let results = []
-            , hateoasNext
-            , getResourceAsyncNext
+        let results = [], hateoasNext, getResourceAsyncNext
     
         let result = await getResourceAsync()
-    
     
         let next = result._linkHeaders.next
     
@@ -46,7 +43,6 @@ class RepositoryServer {
             next = result._linkHeaders.next
             results.push(result)
         }
-
        
         //INICIO
         let daySum = 0, dayAvg = 0
